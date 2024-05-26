@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhgt2qihiuorm"]
+
+[ext_resource type="Texture2D" uid="uid://cydkbwdt1ofud" path="res://assets/sprites/water_cup.png" id="1_mrf86"]
+[ext_resource type="Script" path="res://scripts/water_cup.gd" id="1_tj5vm"]
+[ext_resource type="FontFile" uid="uid://drpxu20hcpfmx" path="res://assets/fonts/PixelOperator8.ttf" id="3_77vq6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p5lm"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0xg5"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk31k"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a80jq"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ap10"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07kpp"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nokc"]
+atlas = ExtResource("1_mrf86")
+region = Rect2(384, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q323v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p5lm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0xg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fk31k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a80jq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ap10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07kpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nokc")
+}],
+"loop": false,
+"name": &"spill",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_px865"]
+size = Vector2(25, 24)
+
+[node name="water_cup" type="Node2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_tj5vm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q323v")
+animation = &"spill"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_px865")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -33.0
+theme_override_fonts/font = ExtResource("3_77vq6")
+text = "+1"
+
+[node name="Timer" type="Timer" parent="Label"]
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="timeout" from="Label/Timer" to="." method="_on_timer_timeout"]
