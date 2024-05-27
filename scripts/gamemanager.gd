@@ -5,7 +5,6 @@ var score = 0
 
 func increaseScore():
 	score += 1
-	print(score)
 	hud.get_node('score').text = str(score_prefix,score)
 
 func death():

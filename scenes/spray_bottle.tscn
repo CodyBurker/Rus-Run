@@ -57,7 +57,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vck4b"]
-size = Vector2(26.5, 10)
+size = Vector2(18, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm65c"]
 size = Vector2(17, 3.5)
@@ -68,12 +68,12 @@ script = ExtResource("1_85jwr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8yf1d")
 autoplay = "default"
-frame_progress = 0.688235
+frame_progress = 0.168199
 
 [node name="killzone" parent="AnimatedSprite2D" instance=ExtResource("2_f85nh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/killzone"]
-position = Vector2(-3.25, 2)
+position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_vck4b")
 
 [node name="waterbottle_weakspot" type="Area2D" parent="AnimatedSprite2D"]
