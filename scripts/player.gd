@@ -35,4 +35,8 @@ func _physics_process(delta):
 			animated_sprite_2d.play("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	if Input.is_action_just_pressed("swipe"):
+		print("Swiped")
+		animated_sprite_2d.play("swipe")
+
 	move_and_slide()
