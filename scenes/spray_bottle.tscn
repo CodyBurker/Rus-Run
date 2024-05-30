@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://8as8wwxdxap5"]
+[gd_scene load_steps=15 format=3 uid="uid://8as8wwxdxap5"]
 
 [ext_resource type="Script" path="res://scripts/spray_bottle.gd" id="1_85jwr"]
 [ext_resource type="Texture2D" uid="uid://crr2gvcwaepww" path="res://assets/sprites/water_bottle.png" id="1_rou7t"]
@@ -23,6 +23,18 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ihpi6"]
 atlas = ExtResource("1_rou7t")
 region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t35w"]
+atlas = ExtResource("1_rou7t")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh34f"]
+atlas = ExtResource("1_rou7t")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vg65"]
+atlas = ExtResource("1_rou7t")
+region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8yf1d"]
 animations = [{
@@ -52,36 +64,57 @@ animations = [{
 "texture": SubResource("AtlasTexture_cb7my")
 }],
 "loop": true,
-"name": &"default",
+"name": &"spray",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t35w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh34f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vg65")
+}],
+"loop": false,
+"name": &"squash",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vck4b"]
-size = Vector2(18, 10)
+size = Vector2(12, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm65c"]
-size = Vector2(17, 3.5)
+size = Vector2(12.001, 1.50077)
 
 [node name="spray_bottle" type="Node2D"]
 script = ExtResource("1_85jwr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8yf1d")
-autoplay = "default"
-frame_progress = 0.168199
+animation = &"squash"
+autoplay = "spray"
 
 [node name="killzone" parent="AnimatedSprite2D" instance=ExtResource("2_f85nh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/killzone"]
-position = Vector2(1, 2)
+position = Vector2(-4, 2)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_vck4b")
+
+[node name="killzone2" parent="AnimatedSprite2D" instance=ExtResource("2_f85nh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/killzone2"]
+position = Vector2(7, 2)
+rotation = 4.71238
 shape = SubResource("RectangleShape2D_vck4b")
 
 [node name="waterbottle_weakspot" type="Area2D" parent="AnimatedSprite2D"]
 
 [node name="enemy_weakspot" type="CollisionShape2D" parent="AnimatedSprite2D/waterbottle_weakspot"]
-position = Vector2(1.5, -5.75)
-rotation = 3.14314
+position = Vector2(1.99952, -7.00155)
+rotation = -3.14005
 shape = SubResource("RectangleShape2D_rm65c")
-one_way_collision = true
 
 [connection signal="body_entered" from="AnimatedSprite2D/waterbottle_weakspot" to="." method="_on_waterbottle_weakspot_body_entered"]
